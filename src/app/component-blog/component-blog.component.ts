@@ -26,6 +26,23 @@ export class ComponentBlogComponent {
 
   blogPosts: BlogPost[] = [];
 
+  constructor() {
+    this.blogPosts = [
+      {
+        title: 'Primera Noticia',
+        image: 'https://via.placeholder.com/600x400',
+        content: 'Este es el contenido de la primera noticia.',
+        date: '2023-01-01'
+      },
+      {
+        title: 'Segunda Noticia',
+        image: 'https://via.placeholder.com/600x400',
+        content: 'Este es el contenido de la segunda noticia.',
+        date: '2023-02-01'
+      }
+    ];
+  }
+
   addBlogPost(form: any) {
     if (form.valid) {
       this.blogPosts.push({ ...this.newBlogPost });
