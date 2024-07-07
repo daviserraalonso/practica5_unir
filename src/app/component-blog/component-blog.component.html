@@ -1,34 +1,45 @@
 <div>
-    <h1>Crear Nueva Noticia de Blog</h1>
-    <form (ngSubmit)="addBlogPost()">
-      <div>
-        <label for="title">Título:</label>
-        <input id="title" [(ngModel)]="newBlogPost.title" name="title" required>
+  <h1>Crear Nueva Noticia de Blog</h1>
+  <form (ngSubmit)="addBlogPost(blogForm)" #blogForm="ngForm">
+    <div>
+      <label for="title">Título:</label>
+      <input id="title" [(ngModel)]="newBlogPost.title" name="title" required>
+      <div *ngIf="blogForm.submitted && blogForm.controls['title']?.invalid">
+        <span *ngIf="blogForm.controls['title']?.errors?.['required']">El título es obligatorio.</span>
       </div>
-      <div>
-        <label for="image">Imagen (URL):</label>
-        <input id="image" [(ngModel)]="newBlogPost.image" name="image" required>
-      </div>
-      <div>
-        <label for="content">Texto:</label>
-        <textarea id="content" [(ngModel)]="newBlogPost.content" name="content" required></textarea>
-      </div>
-      <div>
-        <label for="date">Fecha de Publicación:</label>
-        <input id="date" type="date" [(ngModel)]="newBlogPost.date" name="date" required>
-      </div>
-      <button type="submit">Añadir Noticia</button>
-    </form>
-  </div>
-  
-  <div *ngIf="blogPosts.length > 0">
-    <h2>Noticias del Blog</h2>
-    <div *ngFor="let post of blogPosts">
-      <h3>{{ post.title }}</h3>
-      <img [src]="post.image" alt="Imagen de {{ post.title }}" style="width: 100%; max-width: 600px;">
-      <p>{{ post.content }}</p>
-      <p><strong>Fecha de Publicación:</strong> {{ post.date | date }}</p>
-      <hr>
     </div>
+    <div>
+      <label for="image">Imagen (URL):</label>
+      <input id="image" [(ngModel)]="newBlogPost.image" name="image" required>
+      <div *ngIf="blogForm.submitted && blogForm.controls['image']?.invalid">
+        <span *ngIf="blogForm.controls['image']?.errors?.['required']">La URL de la imagen es obligatoria.</span>
+      </div>
+    </div>
+    <div>
+      <label for="content">Texto:</label>
+      <textarea id="content" [(ngModel)]="newBlogPost.content" name="content" required></textarea>
+      <div *ngIf="blogForm.submitted && blogForm.controls['content']?.invalid">
+        <span *ngIf="blogForm.controls['content']?.errors?.['required']">El texto es obligatorio.</span>
+      </div>
+    </div>
+    <div>
+      <label for="date">Fecha de Publicación:</label>
+      <input id="date" type="date" [(ngModel)]="newBlogPost.date" name="date" required>
+      <div *ngIf="blogForm.submitted && blogForm.controls['date']?.invalid">
+        <span *ngIf="blogForm.controls['date']?.errors?.['required']">La fecha de publicación es obligatoria.</span>
+      </div>
+    </div>
+    <button type="submit">Añadir Noticia</button>
+  </form>
+</div>
+
+<div *ngIf="blogPosts.length > 0">
+  <h2>Noticias del Blog</h2>
+  <div *ngFor="let post of blogPosts">
+    <h3>{{ post.title }}</h3>
+    <img [src]="post.image" alt="Imagen de {{ post.title }}" style="width: 100%; max-width: 600px;">
+    <p>{{ post.content }}</p>
+    <p><strong>Fecha de Publicación:</strong> {{ post.date | date }}</p>
+    <hr>
   </div>
-  
+</div>

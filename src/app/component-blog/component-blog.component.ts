@@ -26,10 +26,11 @@ export class ComponentBlogComponent {
 
   blogPosts: BlogPost[] = [];
 
-  addBlogPost() {
-    if (this.newBlogPost.title && this.newBlogPost.image && this.newBlogPost.content && this.newBlogPost.date) {
+  addBlogPost(form: any) {
+    if (form.valid) {
       this.blogPosts.push({ ...this.newBlogPost });
       this.newBlogPost = { title: '', image: '', content: '', date: '' };
+      form.resetForm();
     }
   }
 }
